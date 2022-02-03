@@ -1,13 +1,34 @@
 package Projekti.Bookstore.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+
+@Entity
 public class Book {
 	
-	private String title, author;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	@Size(min=2, max=20)
+	private String title;
+	
+	private String author;
 	private int year, isbn;
 	private double price;
+	@Min(1)
+	@Max(5)
 	
-	private Book(String title, String author, int year,
-			int isbn, int price) {
+	public Book() {}
+	
+	public Book(String title, String author, int year, int isbn, double price) {
+		
 		super();
 		this.title= title;
 		this.author= author;
@@ -15,51 +36,48 @@ public class Book {
 		this.isbn = isbn;
 		this.price = price;
 	}
-
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public String getAuthor() {
 		return author;
 	}
-
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
 	public int getYear() {
 		return year;
 	}
-
 	public void setYear(int year) {
 		this.year = year;
 	}
-
 	public int getIsbn() {
 		return isbn;
 	}
-
 	public void setIsbn(int isbn) {
 		this.isbn = isbn;
 	}
-
 	public double getPrice() {
 		return price;
 	}
-
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn + ", price=" + price
-				+ "]";
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
+				+ ", price=" + price + "]";
 	}
+
+
 
 }
