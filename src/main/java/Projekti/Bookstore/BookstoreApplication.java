@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import Projekti.Bookstore.domain.Book;
+import Projekti.Bookstore.domain.BookRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
