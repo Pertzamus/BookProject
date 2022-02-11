@@ -4,9 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -16,15 +13,11 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Size(min=2, max=20)
 	private String title;
-	
 	private String author;
 	private int year, isbn;
 	private double price;
-	@Min(1)
-	@Max(5)
+
 	
 	@ManyToOne
 	@JoinColumn(name = "categoryid")
@@ -88,7 +81,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
-				+ ", price=" + price + ", category=" + category + "]";
+				+ ", price=" + price + ", category=" + this.getCategory() + "]";
 	}
 
 
