@@ -84,6 +84,4 @@ public class Book {
 				+ ", price=" + price + ", category=" + this.getCategory() + "]";
 	}
 
-
-
 }

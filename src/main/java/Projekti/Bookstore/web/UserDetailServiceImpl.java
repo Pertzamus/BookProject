@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import Projekti.Bookstore.domain.User;
 import Projekti.Bookstore.domain.UserRepository;
 
+/**
+ * This class is used by spring security to authenticate and authorize user
+ **/
 @Service
 public class UserDetailServiceImpl implements UserDetailsService  {
 	private final UserRepository repository;
@@ -20,8 +23,7 @@ public class UserDetailServiceImpl implements UserDetailsService  {
 	}
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
-    {   
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {   
     	User curruser = repository.findByUsername(username);
         UserDetails user = new org.springframework.security.core.userdetails.User(username, curruser.getPasswordHash(), 
         		AuthorityUtils.createAuthorityList(curruser.getRole()));

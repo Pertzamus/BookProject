@@ -1,12 +1,14 @@
 package Projekti.Bookstore.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import Projekti.Bookstore.domain.Book;
 import Projekti.Bookstore.domain.BookRepository;
 import Projekti.Bookstore.domain.CategoryRepository;
@@ -22,6 +24,11 @@ public class BookController {
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
 	
 	@RequestMapping(value= {"/", "/booklist"})
 	public String bookList(Model model) {
@@ -44,12 +51,14 @@ public class BookController {
 	}
 	
 	@RequestMapping(value ="/delete/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long BookId, Model model) {
 		bookRepository.deleteById(BookId);
 		return "redirect:/booklist";
 	}
 	
     @RequestMapping(value = "/editBook/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String editBook(@PathVariable("id") Long BookId, Model model) {
     	model.addAttribute("book", bookRepository.findById(BookId));
     	model.addAttribute("categories", categoryRepository.findAll());
