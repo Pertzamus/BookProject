@@ -25,6 +25,13 @@ public class Book {
 	
 	public Book() {}
 	
+	public Book(String title, String author, int year) {
+		super();
+		this.title= title;
+		this.author= author;
+		this.year = year;
+	}
+	
 	public Book(String title, String author, int year, int isbn, double price, Category category) {
 		
 		super();
